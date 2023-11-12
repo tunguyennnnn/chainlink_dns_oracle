@@ -1,0 +1,17 @@
+# Use the official Rust image.
+FROM rust:latest
+
+# Set the working directory inside the container to /usr/src/myapp
+WORKDIR /usr/src/myapp
+
+# Copy the source code into the container
+COPY ./chainlink-dns-adapter/dns-adapter-apis .
+
+# Install cargo-watch
+RUN cargo install cargo-watch
+
+# Expose port 9000 to the outside
+EXPOSE 9000
+
+# Command to run the application using cargo-watch for hot reloading
+CMD ["cargo", "watch", "-x", "run"]
